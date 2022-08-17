@@ -3,5 +3,12 @@ uuid = "2a5c9192-a8c0-4f34-852a-2e46010e4ca5"
 authors = ["Lucien Huber <huberlulu@gmail.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+Bijections = "e2ed5e7c-b2de-5872-ae92-c73ca462fb04"
+Catlab = "134e5e36-593f-5add-ad60-77f754baafbe"
+DirectedHalfEdgeGraphs = "f8c2e6cc-c85f-41e3-8cb9-9b946d74cdf0"
+SymbolicUtils = "d1185830-fcd6-423d-90d6-eec64667417b"
+Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
+
 [compat]
 julia = "1.7"
