@@ -172,7 +172,7 @@ uuid = "b552c78f-8df3-52c6-915a-8e097449b14b"
 version = "1.11.0"
 
 [[DirectedHalfEdgeGraphs]]
-deps = ["Catlab", "MomentumGraphs"]
+deps = ["Catlab"]
 path = "../DirectedHalfEdgeGraphs"
 uuid = "f8c2e6cc-c85f-41e3-8cb9-9b946d74cdf0"
 version = "0.1.0"
@@ -421,12 +421,6 @@ version = "1.0.2"
 
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
-
-[[MomentumGraphs]]
-deps = ["Bijections", "Catlab", "DirectedHalfEdgeGraphs", "SymbolicUtils", "Symbolics"]
-path = "/mnt/d/DOC/UNI/ETH/MA/Thesis/MomentumGraphs"
-uuid = "2a5c9192-a8c0-4f34-852a-2e46010e4ca5"
-version = "0.1.0"
 
 [[MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
