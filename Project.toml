@@ -5,6 +5,7 @@ version = "0.1.0"
 
 [deps]
 Bijections = "e2ed5e7c-b2de-5872-ae92-c73ca462fb04"
+CSetAutomorphisms = "1602be87-98d2-44e8-83ad-5679ea8c0714"
 Catlab = "134e5e36-593f-5add-ad60-77f754baafbe"
 DirectedHalfEdgeGraphs = "f8c2e6cc-c85f-41e3-8cb9-9b946d74cdf0"
 MLStyle = "d8e11817-5142-5d16-987a-aa16d5891078"

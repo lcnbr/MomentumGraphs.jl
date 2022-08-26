@@ -1,5 +1,11 @@
 # This file is machine-generated - editing it directly is not advised
 
+[[AbstractAlgebra]]
+deps = ["GroupsCore", "InteractiveUtils", "LinearAlgebra", "Markdown", "Random", "RandomExtensions", "SparseArrays", "Test"]
+git-tree-sha1 = "b5c1a469f9afd3a9d79930d2cead20c562458aae"
+uuid = "c3fe647b-3220-5bb0-a1ea-a7954cac585d"
+version = "0.22.3"
+
 [[AbstractTrees]]
 git-tree-sha1 = "03e0550477d86222521d254b741d470ba17ea0b5"
 uuid = "1520ce14-60c1-5f80-bbc7-55ef81b5835c"
@@ -41,6 +47,11 @@ version = "0.1.0"
 [[Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 
+[[AutoHashEquals]]
+git-tree-sha1 = "45bb6705d93be619b81451bb2006b7ee5d4e4453"
+uuid = "15f4f7f2-30c1-5605-9d31-71845cf9641f"
+version = "0.2.0"
+
 [[Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
@@ -48,6 +59,12 @@ uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 git-tree-sha1 = "fe4f8c5ee7f76f2198d5c2a06d3961c249cce7bd"
 uuid = "e2ed5e7c-b2de-5872-ae92-c73ca462fb04"
 version = "0.1.4"
+
+[[CSetAutomorphisms]]
+deps = ["AutoHashEquals", "Catlab", "DataStructures", "PermutationGroups", "Random", "Test"]
+git-tree-sha1 = "000c55f820951a444dc2367387125d3f07f19c34"
+uuid = "1602be87-98d2-44e8-83ad-5679ea8c0714"
+version = "0.1.0"
 
 [[Calculus]]
 deps = ["LinearAlgebra"]
@@ -172,7 +189,7 @@ uuid = "b552c78f-8df3-52c6-915a-8e097449b14b"
 version = "1.11.0"
 
 [[DirectedHalfEdgeGraphs]]
-deps = ["Catlab"]
+deps = ["Catlab", "MLStyle", "StatsBase"]
 path = "../DirectedHalfEdgeGraphs"
 uuid = "f8c2e6cc-c85f-41e3-8cb9-9b946d74cdf0"
 version = "0.1.0"
@@ -267,6 +284,12 @@ deps = ["DataStructures", "JuliaVariables", "MLStyle", "Serialization"]
 git-tree-sha1 = "60f1fa1696129205873c41763e7d0920ac7d6f1f"
 uuid = "6b9d7cbe-bcb9-11e9-073f-15a7a543e2eb"
 version = "0.3.3"
+
+[[GroupsCore]]
+deps = ["Markdown", "Random"]
+git-tree-sha1 = "9e1a5e9f3b81ad6a5c613d181664a0efc6fe6dd7"
+uuid = "d5909c97-4eac-4ecc-a3dc-fdd0858a4120"
+version = "0.4.0"
 
 [[HypergeometricFunctions]]
 deps = ["DualNumbers", "LinearAlgebra", "OpenLibm_jll", "SpecialFunctions", "Test"]
@@ -482,6 +505,12 @@ git-tree-sha1 = "0044b23da09b5608b4ecacb4e5e6c6332f833a7e"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
 version = "2.3.2"
 
+[[PermutationGroups]]
+deps = ["AbstractAlgebra", "GroupsCore", "Markdown", "Random"]
+git-tree-sha1 = "a06095cec7128a532c2b0bf924d2d982b4e2a595"
+uuid = "8bc5a954-2dfc-11e9-10e6-cd969bffa420"
+version = "0.3.2"
+
 [[Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
@@ -526,6 +555,12 @@ uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 [[Random]]
 deps = ["SHA", "Serialization"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[[RandomExtensions]]
+deps = ["Random", "SparseArrays"]
+git-tree-sha1 = "062986376ce6d394b23d5d90f01d81426113a3c9"
+uuid = "fb686558-2515-59ef-acaa-46db3789a887"
+version = "0.4.3"
 
 [[RecipesBase]]
 git-tree-sha1 = "6bf3f380ff52ce0832ddd3a2a7b9538ed1bcca7d"
