@@ -26,6 +26,7 @@ Symbolics = "4"
 
 
 
+StatsBase = "0.33"
 
 
 SymbolicUtils = "0.19"
