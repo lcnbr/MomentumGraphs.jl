@@ -20,26 +20,14 @@ TermInterface = "8ea1fca8-c5ef-4a55-8b96-4e9afe9c9a3c"
 
 [compat]
 
+MLStyle = "0.4"
 Bijections = "0.1"
-
-
 TermInterface = "0.3"
-
-
 Symbolics = "4"
-
-
-
-
-
 StatsBase = "0.33"
-
-
 SymbolicUtils = "0.19"
-
 Catlab = "0.14"
 CSetAutomorphisms = "0.1"
-
 Karnak = "0.3"
 Colors = "0.12"
 Luxor = "3"
