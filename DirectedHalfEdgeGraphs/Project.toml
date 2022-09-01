@@ -1,0 +1,4 @@
+name = "DirectedHalfEdgeGraphs"
+uuid = "5fe3aa91-9be1-490f-a1bd-257786c72351"
+authors = ["Lucien Huber <huberlulu@gmail.com>"]
+version = "0.1.0"
