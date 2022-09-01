@@ -5,8 +5,13 @@ version = "0.1.0"
 
 [deps]
 Bijections = "e2ed5e7c-b2de-5872-ae92-c73ca462fb04"
+CSetAutomorphisms = "1602be87-98d2-44e8-83ad-5679ea8c0714"
 Catlab = "134e5e36-593f-5add-ad60-77f754baafbe"
+Colors = "5ae59095-9a9b-59fe-a467-6f913c188581"
 DirectedHalfEdgeGraphs = "f8c2e6cc-c85f-41e3-8cb9-9b946d74cdf0"
+Graphs = "86223c79-3864-5bf0-83f7-82e725a168b6"
+Karnak = "cd156443-31ad-4f6f-850f-a93ee5f75905"
+Luxor = "ae8d54c2-7ccd-5906-9d76-62fc9837b5bc"
 MLStyle = "d8e11817-5142-5d16-987a-aa16d5891078"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 SymbolicUtils = "d1185830-fcd6-423d-90d6-eec64667417b"
@@ -14,5 +19,22 @@ Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
 TermInterface = "8ea1fca8-c5ef-4a55-8b96-4e9afe9c9a3c"
 
 [compat]
+
 Symbolics = "4"
+
+
+
+
+
+
+
+SymbolicUtils = "0.19"
+
+Catlab = "0.14"
+CSetAutomorphisms = "0.1"
+
+Karnak = "0.3"
+Colors = "0.12"
+Luxor = "3"
+Graphs = "1"
 julia = "1.7"
