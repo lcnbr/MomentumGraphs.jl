@@ -95,16 +95,14 @@ function DirectedHalfEdgeGraphs.add_half_edges!(g::AbstractFieldGraph, inv::Vect
   he
 end
 
-function DirectedHalfEdgeGraphs.add_dangling_edge!(g::AbstractFieldGraph, v::Int; dir=true, momentum=FVector(value(variables(:p, length(dangling_edges(g)) + 1)[1])), indep=true, field::Symbol=:scalar,dualDict=Dict(:scalar=>:scalar), massDict=Dict(:scalar=>0), kw...)
-  add_part!(g, :H; vertex=v, inv=nparts(g, :H) + 1, sink=dir, momentum=momentum, indep=indep, mass=massDict[field],field=dir  ? field : dualDict[field], kw...)
-end
+
 
 function  DirectedHalfEdgeGraphs.nickel_index(g::AbstractFieldGraph)  
   index=edge_index(g)
   index*=" : "
   for v ∈ vertices(g)
   
-    momenta = join(string.(momentum(g,(dangling_edges(g))))," ")
+    momenta = join(string.(momentum(g,(dangling_edges(g,v))))," ")
     index*=string("|",momenta)
     ns=Base.sort(all_neighbors(g,v))
     newns=ns[ns.>v]
@@ -133,7 +131,7 @@ to_graphviz(g::AbstractFieldGraph; kw...) =
 function to_graphviz_property_graph(g::AbstractFieldGraph;
   prog::AbstractString="neato", graph_attrs::AbstractDict=Dict(),
   node_attrs::AbstractDict=Dict(), edge_attrs::AbstractDict=Dict(),
-  node_labels::Union{Symbol,Bool}=false, edge_labels::Union{Symbol,Bool}=false,field_colors::AbstractDict=Dict()) 
+  node_labels::Union{Symbol,Bool}=false, edge_labels::Union{Symbol,Bool}=false,field_colors::AbstractDict=Dict(:scalar=>"black")) 
   pg = PropertyGraph{Any}(; prog=prog,
     graph=graph_attrs,
     node=merge!(default_node_attrs(node_labels), node_attrs),
@@ -154,7 +152,7 @@ function to_graphviz_property_graph(g::AbstractFieldGraph;
   end
   for (source, sink) ∈ zip(half_edge_pairs(g)...)
     (src, tgt) = (vertex(g, source), vertex(g, sink))
-    e = add_edge!(pg, src, tgt, penwidth=string(mass(g, source) + 1))
+    e = add_edge!(pg, src, tgt, penwidth=string(mass(g, source) + 1),color=string(field_colors[field(g, source)],";0.5:",field_colors[field(g, sink)]))
     set_eprops!(pg, e, edge_label(g, edge_labels, e))
   end
   pg

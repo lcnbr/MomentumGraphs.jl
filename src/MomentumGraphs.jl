@@ -65,8 +65,8 @@ function momentum_equations(g::AbstractMomentumGraph)
   eqs[.!useless]
 end
 
-function momentum_equations_solved(g::AbstractMomentumGraph)
-  set_independent_loops!(g)
+function momentum_equations_solved(g::AbstractMomentumGraph;kw...)
+  set_independent_loops!(g;kw...)
   allindep=indep(g)
   depMom =(p->p.symbol).((p->p.symbol).(unique(momentum(g)[.!allindep])))
   eqs=momentum_equations(g)
@@ -115,8 +115,8 @@ end
 indep!(g::AbstractMomentumGraph,args... ) = set_subpart!(g, args..., :indep,true)
 
 
-function set_independent_loops!(g::AbstractMomentumGraph)
-  spanningTree=subtree(g,dfs_parents(g,1,all_neighbors))  
+function set_independent_loops!(g::AbstractMomentumGraph;kw...)
+  spanningTree=subtree(g,dfs_parents(g,1,all_neighbors;kw...))  
   set_independent_loops!(g,spanningTree)
 end
 
@@ -161,26 +161,7 @@ include("MassiveMomentumGraphs.jl")
 
 include("FieldGraphs.jl")
 
-abstract type AbstractDiagram end
-
-struct qDiagram{G}
-  ID::Int
-  pre_factor::Rational
-  nloops::Int
-  nprops::Int
-  nin::Int
-  nout::Int
-  g::G
-  nickel_index::String 
-end
-using CSetAutomorphisms
-using .FieldGraphs
-
-function qDiagram(H::AbstractVector{Int},H′::AbstractVector{Int},vs::AbstractVector{Int},fields::AbstractVector{Symbol};ID::Int,pre_factor::Rational,nprops::Int,nloops::Int,nin::Int,nout::Int)
-  g=FieldGraph(H,H′,vs,fields,dualDict=Dict(:phi1=>:phi1c,:phi2=>:phi2c,:photon=>:photon), massDict=Dict(:photon=>0,:phi1=>1,:phi2=>2,:phi1c=>1,:phi2c=>2))
-  return qDiagram{FieldGraph}(ID,pre_factor,nprops,nloops,nin,nout,g,nickel_index(call_nauty(g).cset))
-end
-
+include("Diagrams.jl")
 
 end
   

@@ -53,8 +53,14 @@ f(a::Int, b::Int=0, c=4) = c - _f(a, b)
 
 nickel_index(call_nauty(qd.g).cset)
 to_graphviz(qd.g)
-include("julTest3l.jl")
+include("julTest2l.jl")
 using StatsBase
+
+import Catlab.Graphics.Graphviz: Graph,run_graphviz
+
+function Base.show(io::IO, ::MIME"image/svg+xml", graph::Graph)
+  run_graphviz(io, graph, format="svgz")
+end
 
 import Catlab.Theories: ⊕
 function ⊕(a, b...)
@@ -62,9 +68,11 @@ function ⊕(a, b...)
 end
 ⊕([qd.g, qd.g, qd.g]...)
 unique!(d -> d.nickel_index, diags)
-
-to_graphviz(⊕(((x -> x.g).(sample(diags, 6432 , replace=false))...)),
-  field_colors=Dict(:photon => "black", :phi1 => "blue", :phi2 => "red", :phi1c => "blue", :phi2c => "red"))
+diags
+(d -> d.nickel_index).(diags)
+#(sample(diags,    253 , replace=false))...
+alldiags=(⊕(((x -> x.g).(diags))...))
+to_graphviz(alldiags,field_colors=Dict(:photon => "black", :phi1 => "blue", :phi2 => "red", :phi1c => "deepskyblue", :phi2c => "indianred"))
 (x -> x.g).(diags)
 
 
