@@ -5,6 +5,16 @@ import SymbolicUtils: to_symbolic
 import Symbolics: variable,value,getname
 export FIndex,FSymbol,FVector
 import Base: +, -, *
+import Latexify: unicode2latex
+using REPL
+
+
+function unicode2ascii(s::String)
+  replace(unicode2latex(s), r"[^\w]*" => "")
+end
+unicode2ascii(s::Symbol)=unicode2ascii(string(s))
+
+unicode2ascii("#dummyfmu_μ₁₂")
 
 
 struct FSymbol
@@ -26,19 +36,24 @@ Base.show(io::IO, s::FSymbol) = print(io,  s.symbol)
 Base.show(io::IO, ::MIME"text/plain", s::FSymbol) =
            print(io, "FORM Symbol: ", s)
 Base.show(io::IO, ::MIME"text/FORM", s::FSymbol) =
-           print(io, "S", s,";")
+           print(io, unicode2ascii(s.symbol))
 
 
 struct FIndex 
   dimension::Union{Int,FSymbol}
   ID::Symbol
   generated::Bool
-  function  FIndex(dimension,ID)
+  function  FIndex(dimension::Union{Int,FSymbol},ID::Symbol)
     new(dimension,ID,is_gensym(ID))
   end
 end
 
-function FIndex(ID=gensym(:dummy);dimension=4,)
+function FIndex(ID::Symbol=gensym(:dummy);dimension=4)
+  FIndex(dimension,ID)
+end
+
+function FIndex(greek::String,num::Int;dimension=4,)
+  ID=Symbol(REPL.REPLCompletions.latex_symbols["\\$greek"]*subscript(num))
   FIndex(dimension,ID)
 end
 
@@ -46,14 +61,14 @@ function Base.show(io::IO, i::FIndex)
   if(i.generated)
     print(io, "μ",  subscript(gensym_to_num(i.ID)))
   else
-    print(io, i.ID)
+    print(io, string(i.ID))
   end
 end
 
 Base.show(io::IO, ::MIME"text/plain", i::FIndex) =
            print(io, "FORM Index: ", i, "with dimension ", i.dimension)
 Base.show(io::IO, ::MIME"text/FORM", i::FIndex) =
-           print(io, "I", i,";")
+           print(io, unicode2ascii(i.ID))
 
 
 mutable struct FVector 
@@ -75,6 +90,8 @@ function *(a::FVector  , b::FVector)
 end
 
 FVector(symbol;dimension=4)=FVector(FSymbol(symbol),FIndex(dimension=dimension))
+FVector(symbol,IndexID;dimension=4)=FVector(FSymbol(symbol),FIndex("mu",IndexID;dimension=dimension))
+
 
 FVector()=FVector(:p)
 
@@ -138,5 +155,6 @@ function is_gensym(symbol::Symbol)
 end
 
 subscript(i) = join(Char(0x2080 + d) for d in reverse!(digits(i)))
+
 
 end

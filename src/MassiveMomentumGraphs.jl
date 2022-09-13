@@ -1,9 +1,13 @@
+module MassiveMomentumGraphs
 
+using Catlab
+  
+import ...Fields: mass
 
 
 @present SchMassiveMomentumGraph <: SchMomentumGraph begin
-  Weight::AttrType
-  mass::Attr(H, Weight)
+Weight::AttrType
+mass::Attr(H, Weight)
 end
 
 @abstract_acset_type AbstractMassiveMomentumGraph <: AbstractMomentumGraph
@@ -22,7 +26,7 @@ function add_half_edge_pairs!(g::AbstractMassiveMomentumGraph, srcs::AbstractVec
   @assert (n = length(srcs)) == length(tgts)
 
   neIn = length(first(half_edge_pairs(g)))
-
+  
   momenta = FVector.(value.(variables(:q, (neIn+1):neIn+n)))
 
   outs = add_parts!(g, :H, n; vertex=srcs, kw...)
@@ -65,10 +69,10 @@ node_label(g, labels::Bool, v::Int) = Dict(:label => labels ? string(v) : "")
 
 edge_label(g, name::Symbol, e::Int) = Dict(:label => string(g[e, name]))
 edge_label(g, labels::Bool, e::Int) =
-  labels ? Dict(:label => string(e)) : Dict{Symbol,String}()
+labels ? Dict(:label => string(e)) : Dict{Symbol,String}()
 
 to_graphviz(g::AbstractMassiveMomentumGraph; kw...) =
-  to_graphviz(to_graphviz_property_graph(g; kw...))
+to_graphviz(to_graphviz_property_graph(g; kw...))
 
 function to_graphviz_property_graph(g::AbstractMassiveMomentumGraph;
   prog::AbstractString="neato", graph_attrs::AbstractDict=Dict(),
@@ -101,6 +105,7 @@ function to_graphviz_property_graph(g::AbstractMassiveMomentumGraph;
 end
 
 
+end
 
 
 

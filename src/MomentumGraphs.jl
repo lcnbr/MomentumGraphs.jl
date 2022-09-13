@@ -3,6 +3,8 @@ module MomentumGraphs
 
 include("Form.jl")
 
+function mass end
+include("Fields.jl")
 
 
 using .Form
@@ -79,8 +81,8 @@ end
 #*****************************************************************************
 # Edit graph
 
-function add_half_edge_pairs!(g::AbstractMomentumGraph, srcs::AbstractVector{Int},
-  tgts::AbstractVector{Int}; indeps=falses(length(srcs)),kw...)
+function add_half_edge_pairs!(g::AbstractMomentumGraph, srcs::AbstractVector{Int}, tgts::AbstractVector{Int};
+  indeps=falses(length(srcs)),kw...)
 
   @assert (n = length(srcs)) == length(tgts)
   
@@ -114,6 +116,8 @@ end
 
 indep!(g::AbstractMomentumGraph,args... ) = set_subpart!(g, args..., :indep,true)
 
+dep!(g::AbstractMomentumGraph,args... ) = set_subpart!(g, args..., :indep,false)
+
 
 function set_independent_loops!(g::AbstractMomentumGraph;kw...)
   spanningTree=subtree(g,dfs_parents(g,1,all_neighbors;kw...))  
@@ -123,8 +127,12 @@ end
 function set_independent_loops!(g::AbstractMomentumGraph,spanningTree)
   sg=Subobject(g,H=half_edges(g),V=vertices(g))
   f=hom(sg\spanningTree)
-  for h in half_edges(dom(f))
-    indep!(g,f[:H](h))
+  for h in half_edges(g)
+    if h in f[:H].(half_edges(dom(f)))
+      indep!(g,h)
+    else
+      dep!(g,h)
+    end 
   end
 end
 

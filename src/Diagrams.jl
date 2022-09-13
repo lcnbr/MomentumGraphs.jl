@@ -1,4 +1,4 @@
-
+module Diagrams
 
 abstract type AbstractDiagram end
 
@@ -15,8 +15,20 @@ end
 using CSetAutomorphisms
 using .FieldGraphs
 
-function qDiagram(H::AbstractVector{Int},H′::AbstractVector{Int},vs::AbstractVector{Int},fields::AbstractVector{Symbol};ID::Int,pre_factor::Rational,nprops::Int,nloops::Int,nin::Int,nout::Int)
-  g=FieldGraph(H,H′,vs,fields,dualDict=Dict(:phi1=>:phi1c,:phi2=>:phi2c,:photon=>:photon), massDict=Dict(:photon=>0,:phi1=>1,:phi2=>2,:phi1c=>1,:phi2c=>2))
+function qDiagram(;
+  H::AbstractVector{Int},
+  Hdual::AbstractVector{Int},
+  vertex::AbstractVector{Int},
+  field::AbstractVector{Symbol},
+  ID::Int,
+  pre_factor::Rational,
+  nprops::Int,
+  nloops::Int,
+  nin::Int,
+  nout::Int,
+  dualDict,
+  massDict)
+  g=FieldGraph(H,Hdual,vertex,field;dualDict,massDict)
   return qDiagram{FieldGraph}(ID,pre_factor,nprops,nloops,nin,nout,g,nickel_index(call_nauty(g).cset))
 end
 
@@ -30,6 +42,11 @@ struct Vertex <: IsVertex
   rule::Function  
 end
 
+seagull_rule = function(g, v)
+  
+  return g.H[v].degree == 1
+end
+
 struct Propagator <: IsProp 
   field::Symbol
   rule::Function
@@ -40,3 +57,4 @@ struct Theory
   propagatorrules::AbstractVector{Propagator}
 end
 
+end
